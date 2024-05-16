@@ -10,8 +10,8 @@ import subprocess
 from requests.exceptions import ReadTimeout
 
 # 用户名和密码变量
-username = ""
-password = ""
+username = "账号"
+password = "密码"
 # 设置Chrome驱动路径
 chrome_driver_paths = r'C:\Program Files\Google\Chrome\Application\chromedriver-win64\chromedriver.exe'  # 替换为实际的chromedriver路径
 
@@ -39,25 +39,33 @@ def get_current_ssid():
         print(f"Error getting current SSID: {e}")
     return None
 
-def connect_to_wifi(profile_name):
-    try:
-        subprocess.call(["netsh", "wlan", "connect", f"name={profile_name}"])
-        time.sleep(3)  # 等待连接完成
-    except Exception as e:
-        print(f"Error connecting to WiFi: {e}")
+def connect_to_wifi(profile_names):
+    for profile_name in profile_names:
+        try:
+            subprocess.call(["netsh", "wlan", "connect", f"name={profile_name}"])
+            time.sleep(3)  # 等待连接完成
+            current_ssid = get_current_ssid()
+            if current_ssid == profile_name:
+                print(f"成功连接到 {profile_name}")
+                return True
+        except Exception as e:
+            print(f"Error connecting to WiFi: {e}")
+    return False
 
 # 检查是否连接到指定的SSID
 current_ssid = get_current_ssid()
-if current_ssid != "LZU":
-    print(f"当前未连接到LZU WiFi，当前连接的是 {current_ssid}，尝试连接到LZU")
-    connect_to_wifi("LZU")
+if current_ssid not in ["LZU", "iLZU"]:
+    print(f"当前未连接到LZU或iLZU WiFi，当前连接的是 {current_ssid}，尝试连接到LZU或iLZU")
+    if not connect_to_wifi(["LZU", "iLZU"]):
+        print("无法连接到LZU或iLZU WiFi，请检查网络设置。")
+        exit()
 
-# 再次检查是否已经连接到LZU WiFi
+# 再次检查是否已经连接到LZU或iLZU WiFi
 current_ssid = get_current_ssid()
-if current_ssid != "LZU":
-    print("无法连接到LZU WiFi，请检查网络设置。")
+if current_ssid not in ["LZU", "iLZU"]:
+    print("无法连接到LZU或iLZU WiFi，请检查网络设置。")
 else:
-    print("已经连接到LZU WiFi，继续执行后续代码")
+    print(f"已经连接到 {current_ssid} WiFi，继续执行后续代码")
 
     # 检查是否有网络连接
     if check_internet_connection():

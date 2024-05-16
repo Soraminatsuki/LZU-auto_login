@@ -1,6 +1,6 @@
 
 # 项目简介
-自动用设置的校园账号密码，连接"LZU"WiFi，由于使用的是@eLearning登录，理论上没有流量限制。
+自动用设置的校园账号密码，连接"LZU"或"iLZU"WiFi，由于使用的是@eLearning登录，理论上没有流量限制。
 
 # 所需库与环境
 
@@ -31,7 +31,7 @@ chrome_driver_path = r'C:\Program Files\Google\Chrome\Application\chromedriver-w
 将 `auto_login.py` 中的以上变量替换为实际情况。
 `chromedriver.exe`提供了最新版本，如果不符合当前环境要求，可自行官网下载适合版本。
 
-## Step 3: 将批处理文件添加到启动项（可选）
+## Step 2: 批处理文件
 
 右键编辑或自行用记事本创建 `auto_login.bat` 的批处理文件，并将以下内容粘贴进去：
 
