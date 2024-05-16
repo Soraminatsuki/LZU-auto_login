@@ -1,8 +1,7 @@
 
 # 项目简介
-1.自动用设置的校园账号密码，连接"LZU"或"iLZU"WiFi，由于使用的是@eLearning登录，理论上没有流量限制。
-
-2.@eLearning限制登录设备一台，请确保账号下没有其他设备登录。
+1. 自动用设置的校园账号密码，连接"LZU"或"iLZU"WiFi，由于使用的是@eLearning登录，理论上没有流量限制。
+2. @eLearning限制登录设备一台，故需确保账号下没有其他设备使用@eLearning登录校园网。
 
 # 所需库与环境
 
@@ -54,3 +53,9 @@ pause
 
 2. 将 `auto_login.bat` 文件复制到“启动”文件夹：
     - 任何放在这个文件夹中的程序或脚本都会在系统启动时自动运行。
+
+## Tips
+有可能WiFi连接时间超出了响应时间，所以运行bat出现连接失败，这种情况重新运行bat即可正常自动连接。
+
+![alt text](terminal.png)
+![alt text](picture.png)
