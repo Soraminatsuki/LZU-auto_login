@@ -43,7 +43,7 @@ def connect_to_wifi(profile_names):
     for profile_name in profile_names:
         try:
             subprocess.call(["netsh", "wlan", "connect", f"name={profile_name}"])
-            time.sleep(3)  # 等待连接完成
+            time.sleep(6)  # 等待连接完成
             current_ssid = get_current_ssid()
             if current_ssid == profile_name:
                 print(f"成功连接到 {profile_name}")
