@@ -40,7 +40,7 @@ password = "校园网密码"
 pause
 ```
 
-1. 将以上变量替换成实际情况， `E:\Anaconda\envs\opencv_env\python.exe` 为python环境路径，`D:\室内监测\Code\XGBoost and SHAP\XGBoost and SHAP\auto_logins.py`为py文件路径。
+1. 将以上变量替换成实际情况， `E:\Anaconda\envs\opencv_env\python.exe` 为python环境路径，`E:\Auto_login\auto_login.py`为py文件路径。
 2. 保持电脑WiFi开关为开，运行bat文件即可自动登录校园网。
 
 ## Step 3: 将批处理文件添加到启动项（可选）
