@@ -1,6 +1,6 @@
 
 # 项目简介
-自动连接"LZU"校园WiFi
+自动用设置的校园账号密码，连接"LZU"WiFi，由于使用的是@eLearning登录，理论上没有流量限制。
 
 # 所需库与环境
 
@@ -11,12 +11,11 @@
 - `selenium`：用于自动化登录校园网页面。
 - `subprocess`：用于执行系统命令，如获取当前连接的 WiFi SSID 和连接指定的 WiFi。
 - `time`：用于暂停执行，等待操作完成。
-- `webdriver_manager`： 自动管理和下载chrome驱动。
 
 这些库可以通过以下命令安装：
 
 ```bash
-pip install requests selenium webdriver_manager
+pip install requests selenium
 ```
 
 # 实现步骤
@@ -26,13 +25,15 @@ pip install requests selenium webdriver_manager
 ```python
 username = "校园网账号"
 password = "校园网密码"
+chrome_driver_path = r'C:\Program Files\Google\Chrome\Application\chromedriver-win64\chromedriver.exe'
 ```
 
 将 `auto_login.py` 中的以上变量替换为实际情况。
+`chromedriver.exe`提供了最新版本，如果不符合当前环境要求，可自行官网下载适合版本。
 
-## Step 2: 创建批处理文件
+## Step 3: 将批处理文件添加到启动项（可选）
 
-在项目目录下创建一个名为 `auto_login.bat` 的批处理文件，并将以下内容粘贴进去：
+右键编辑或自行用记事本创建 `auto_login.bat` 的批处理文件，并将以下内容粘贴进去：
 
 ```batch
 @echo off

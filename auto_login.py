@@ -5,7 +5,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
 import time
 import subprocess
 from requests.exceptions import ReadTimeout
@@ -13,6 +12,8 @@ from requests.exceptions import ReadTimeout
 # 用户名和密码变量
 username = "账号"
 password = "密码"
+# 设置Chrome驱动路径
+chrome_driver_path = r'C:\Program Files\Google\Chrome\Application\chromedriver-win64\chromedriver.exe'  # 替换为实际的chromedriver路径
 
 def check_internet_connection(url="https://www.baidu.com", timeout=1):
     try:
@@ -45,6 +46,8 @@ def connect_to_wifi(profile_name):
     except Exception as e:
         print(f"Error connecting to WiFi: {e}")
 
+
+
 # 检查是否连接到指定的SSID
 current_ssid = get_current_ssid()
 if current_ssid != "LZU":
@@ -70,8 +73,11 @@ else:
         chrome_options.add_argument("--disable-gpu")
         chrome_options.add_argument("--no-sandbox")
 
+        # # 设置Chrome驱动路径
+        # chrome_driver_path = r'C:\Program Files\Google\Chrome\Application\chromedriver-win64\chromedriver.exe'  # 替换为实际的chromedriver路径
+
         # 创建浏览器驱动
-        service = Service(ChromeDriverManager().install())
+        service = Service(chrome_driver_path)
         driver = webdriver.Chrome(service=service, options=chrome_options)
 
         try:
