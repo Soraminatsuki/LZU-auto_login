@@ -10,8 +10,8 @@ import subprocess
 from requests.exceptions import ReadTimeout
 
 # 用户名和密码变量
-username = "220220948881"
-password = "BaldrSky269579059"
+username = ""
+password = ""
 # 设置Chrome驱动路径
 chrome_driver_paths = r'C:\Program Files\Google\Chrome\Application\chromedriver-win64\chromedriver.exe'  # 替换为实际的chromedriver路径
 
