@@ -10,10 +10,10 @@ import subprocess
 from requests.exceptions import ReadTimeout
 
 # 用户名和密码变量
-username = "账号"
-password = "密码"
+username = "220220948881"
+password = "BaldrSky269579059"
 # 设置Chrome驱动路径
-chrome_driver_path = r'C:\Program Files\Google\Chrome\Application\chromedriver-win64\chromedriver.exe'  # 替换为实际的chromedriver路径
+chrome_driver_paths = r'C:\Program Files\Google\Chrome\Application\chromedriver-win64\chromedriver.exe'  # 替换为实际的chromedriver路径
 
 def check_internet_connection(url="https://www.baidu.com", timeout=1):
     try:
@@ -25,7 +25,7 @@ def check_internet_connection(url="https://www.baidu.com", timeout=1):
 def kill_chromedriver():
     try:
         # 确保所有chromedriver进程被终止
-        subprocess.call(["taskkill", "/F", "/IM", "chromedriver.exe", "/T"])
+        subprocess.call(["taskkill", "/F", "/IM", "chromedriver.exe", "/T"], stderr=subprocess.DEVNULL)
     except Exception as e:
         print(f"Error killing chromedriver: {e}")
 
@@ -42,11 +42,9 @@ def get_current_ssid():
 def connect_to_wifi(profile_name):
     try:
         subprocess.call(["netsh", "wlan", "connect", f"name={profile_name}"])
-        time.sleep(5)  # 等待连接完成
+        time.sleep(3)  # 等待连接完成
     except Exception as e:
         print(f"Error connecting to WiFi: {e}")
-
-
 
 # 检查是否连接到指定的SSID
 current_ssid = get_current_ssid()
@@ -73,8 +71,8 @@ else:
         chrome_options.add_argument("--disable-gpu")
         chrome_options.add_argument("--no-sandbox")
 
-        # # 设置Chrome驱动路径
-        # chrome_driver_path = r'C:\Program Files\Google\Chrome\Application\chromedriver-win64\chromedriver.exe'  # 替换为实际的chromedriver路径
+        # 设置Chrome驱动路径
+        chrome_driver_path = chrome_driver_paths
 
         # 创建浏览器驱动
         service = Service(chrome_driver_path)
@@ -128,18 +126,10 @@ else:
             login_button.click()
 
             # 等待登录完成
-            time.sleep(2)
+            time.sleep(1)
 
-            # 尝试访问百度主页以验证是否成功连接到互联网
-            driver.get("https://www.baidu.com")
-
-            # 等待页面加载
-            WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.ID, "su"))
-            )
-
-            # 检查是否成功访问百度主页
-            if "百度" in driver.title:
+            # 使用 check_internet_connection 函数来验证是否成功连接到互联网
+            if check_internet_connection():
                 print("登录成功并连接到互联网")
             else:
                 print("登录失败或未连接到互联网")
